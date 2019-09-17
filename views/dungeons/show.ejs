@@ -1,0 +1,51 @@
+<% include ../partials/header %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p class="lead">Dungeon Finder</p>
+      <div class="list-group">
+        <li class="list-group-item active">Info</li>
+        <li class="list-group-item">Location</li>
+        <li class="list-group-item">Prices</li>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="thumbnail">
+        <img class="img-responsive img-thumbnail" src="<%= dungeon.image %>">
+        <div class="caption">
+          <h4 class="float-right">Lvl 1-3</h4>
+          <h4><a href="#"><%=dungeon.name%></a></h4>
+          <p> <%=dungeon.description%> </p>
+          <p><em>added by <%= dungeon.author.username %></em></p>
+        </div>
+      </div>
+      <div class="well">
+        <hr>
+        <div class="text-right">
+          <p><a class="btn btn-success" href="/dungeons/<%=dungeon._id%>/comments/new">Add a new comment</a></p>
+        </div>
+        <% dungeon.comments.forEach(function(comment){ %>
+          <div class="row">
+            <div class="col-md-12">
+                <strong><%= comment.author.username %></strong>
+                <span class="float-right">10 days ago</span>
+                <p><%= comment.text %></p>
+              <% }) %>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<% include ../partials/footer %>
