@@ -12,11 +12,13 @@ var express     = require("express"),
     commentRoutes = require("./routes/comments");
     dungeonRoutes = require("./routes/dungeons");
     indexRoutes = require("./routes/index");
+    methodOverride = require("method-override");
 
 mongoose.connect("mongodb://localhost/dungeonfinder", { useNewUrlParser: true, useCreateIndex: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs"); //set the default type of file for templates to ejs
+app.use(methodOverride("_method"));
 
  // seedDB();
 

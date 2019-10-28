@@ -52,6 +52,26 @@ router.get("/:id", function(req, res) {
     });
 });
 
+//EDIT
+router.get("/:id/edit", function(req, res){
+  Dungeon.findById(req.params.id, function(err, foundDungeon) {
+    if (err){
+      res.redirect("/dungeons");
+    }
+    res.render("dungeons/edit", {dungeon: foundDungeon});
+  });
+});
+//UPDATE
+router.put("/:id", function(req, res){
+  Dungeon.findByIdAndUpdate(req.params.id, req.body.dungeon, function (err, updatedDungeon) {
+    if(err){
+      res.redirect("/dungeons");
+    }
+      res.redirect("/dungeons/" + req.params.id);
+  })
+})
+
+
 //Middleware
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){

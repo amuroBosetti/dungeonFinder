@@ -17,6 +17,8 @@
           <h4><a href="#"><%=dungeon.name%></a></h4>
           <p> <%=dungeon.description%> </p>
           <p><em>added by <%= dungeon.author.username %></em></p>
+
+          <a class="btn btn-warning" href="/dungeons/<%= dungeon._id %>/edit">Edit</a>
         </div>
       </div>
       <div class="well">
@@ -38,14 +40,5 @@
   </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 <% include ../partials/footer %>
