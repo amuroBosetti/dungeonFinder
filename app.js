@@ -14,7 +14,7 @@ var express     = require("express"),
     indexRoutes = require("./routes/index");
     methodOverride = require("method-override");
 
-mongoose.connect("mongodb://localhost/dungeonfinder", { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect("mongodb://localhost/dungeonfinder", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs"); //set the default type of file for templates to ejs

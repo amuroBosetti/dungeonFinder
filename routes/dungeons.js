@@ -61,6 +61,7 @@ router.get("/:id/edit", function(req, res){
     res.render("dungeons/edit", {dungeon: foundDungeon});
   });
 });
+
 //UPDATE
 router.put("/:id", function(req, res){
   Dungeon.findByIdAndUpdate(req.params.id, req.body.dungeon, function (err, updatedDungeon) {
@@ -69,6 +70,18 @@ router.put("/:id", function(req, res){
     }
       res.redirect("/dungeons/" + req.params.id);
   })
+})
+
+// REMOVE / DESTROY
+router.delete("/:id", function(req, res){
+    Dungeon.findByIdAndRemove(req.params.id, function(err) {
+      if(err){
+        res.redirect("/dungeons");
+      } else {
+        res.redirect("/dungeons");
+      } 
+    });
+
 })
 
 

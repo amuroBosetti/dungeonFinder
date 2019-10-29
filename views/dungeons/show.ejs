@@ -18,13 +18,16 @@
           <p> <%=dungeon.description%> </p>
           <p><em>added by <%= dungeon.author.username %></em></p>
 
-          <a class="btn btn-warning" href="/dungeons/<%= dungeon._id %>/edit">Edit</a>
+          <a class="btn btn-xs btn-warning" href="/dungeons/<%= dungeon._id %>/edit">Edit</a>
+          <form id="delete-form" action="/dungeons/<%=dungeon._id%>?_method=DELETE" method="post">
+            <button class="btn btn-xs btn-danger">Delete</button>
+          </form>
         </div>
       </div>
       <div class="well">
         <hr>
         <div class="text-right">
-          <p><a class="btn btn-success" href="/dungeons/<%=dungeon._id%>/comments/new">Add a new comment</a></p>
+          <p><a class="btn btn btn-success" href="/dungeons/<%=dungeon._id%>/comments/new">Add a new comment</a></p>
         </div>
         <% dungeon.comments.forEach(function(comment){ %>
           <div class="row">
