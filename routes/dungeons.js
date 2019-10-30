@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Dungeon = require("../models/dungeon");
 var comment = require("../models/comment");
+var middleware = require ("../middleware");
 
 //INDEX - Muestra una lista de todas las dungeons
 router.get("/", function(req, res){ //page that lists every dungeon
@@ -15,12 +16,12 @@ router.get("/", function(req, res){ //page that lists every dungeon
 });
 
 //NEW - Muestra el formulario para crear una nueva dungeon
-router.get("/new",isLoggedIn, function(req, res) {
+router.get("/new",middleware.isLoggedIn, function(req, res) {
     res.render("dungeons/new");
 })
 
 //CREATE - Añadir una nueva dungeon
-router.post("/",isLoggedIn, function(req, res){
+router.post("/",middleware.isLoggedIn, function(req, res){
     //get data from form
     var name = req.body.name;
     var image = req.body.image;
@@ -53,17 +54,17 @@ router.get("/:id", function(req, res) {
 });
 
 //EDIT
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", middleware.checkDungeonOwnership, function(req, res){
+  //is user logged in
   Dungeon.findById(req.params.id, function(err, foundDungeon) {
-    if (err){
-      res.redirect("/dungeons");
-    }
-    res.render("dungeons/edit", {dungeon: foundDungeon});
+      res.render("dungeons/edit", {dungeon: foundDungeon}
+    );
   });
 });
 
+
 //UPDATE
-router.put("/:id", function(req, res){
+router.put("/:id", middleware.checkDungeonOwnership, function(req, res){
   Dungeon.findByIdAndUpdate(req.params.id, req.body.dungeon, function (err, updatedDungeon) {
     if(err){
       res.redirect("/dungeons");
@@ -73,24 +74,15 @@ router.put("/:id", function(req, res){
 })
 
 // REMOVE / DESTROY
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.checkDungeonOwnership, function(req, res){
     Dungeon.findByIdAndRemove(req.params.id, function(err) {
       if(err){
         res.redirect("/dungeons");
       } else {
         res.redirect("/dungeons");
-      } 
+      }
     });
 
 })
-
-
-//Middleware
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

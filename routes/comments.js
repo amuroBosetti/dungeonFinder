@@ -2,9 +2,10 @@ var express = require("express");
 var router = express.Router({mergeParams: true});
 var Dungeon = require("../models/dungeon");
 var comment = require("../models/comment");
+var middleware = require ("../middleware");
 
 // COMMENTS //
-router.get("/new",isLoggedIn, function(req, res){
+router.get("/new",middleware.isLoggedIn, function(req, res){
   //find dungeon by id
   Dungeon.findById(req.params.id, function(err, dungeon){
     if(err){
@@ -15,7 +16,8 @@ router.get("/new",isLoggedIn, function(req, res){
   });
 })
 
-router.post('/',isLoggedIn, function(req, res){
+
+router.post('/',middleware.isLoggedIn, function(req, res){
   //find dungeon by id
   Dungeon.findById(req.params.id, function(err, dungeon){
     if(err){
@@ -42,12 +44,36 @@ router.post('/',isLoggedIn, function(req, res){
   });
 });
 
-//Middleware
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login");
-}
+//EDIT
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
+  Comment.findById(req.params.comment_id, function(err, foundComment) {
+    if(err){
+      res.redirect("back");
+    } else{
+      res.render("comments/edit", {dungeon_id: req.params.id, comment: foundComment});
+    }
+  })
+
+})
+//UPDATE
+router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res) {
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function (err, updatedComment) {
+    if(err){
+      res.redirect("back");
+    }
+      res.redirect("/dungeons/" + req.params.id);
+  })
+})
+
+//DESTROY
+router.delete("/:comment_id",middleware.checkCommentOwnership, function(req, res) {
+  Comment.findByIdAndRemove(req.params.comment_id, function(err){
+    if (err){
+      res.redirect("back");
+    } else {
+      res.redirect("/dungeons/" + req.params.id);
+    }
+  })
+})
 
 module.exports = router;
