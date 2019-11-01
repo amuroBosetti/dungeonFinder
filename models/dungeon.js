@@ -3,6 +3,8 @@ var mongoose = require("mongoose");
 var dungeonSchema = new mongoose.Schema({
     name: String,
     image: String,
+    minLevel: Number,
+    maxLevel: Number,
     description: String,
     author: {
       id: {

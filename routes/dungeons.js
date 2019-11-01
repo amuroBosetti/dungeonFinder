@@ -26,12 +26,14 @@ router.post("/",middleware.isLoggedIn, function(req, res){
     var name = req.body.name;
     var image = req.body.image;
     var desc = req.body.description;
+    var minLevel = req.body.minLevel;
+    var maxLevel = req.body.maxLevel;
     //add to dungeons db
     var author = {
       id: req.user._id,
       username: req.user.username
     };
-    var newDungeon = {name: name, image: image, description: desc, author: author};
+    var newDungeon = {name: name, image: image, minLevel: minLevel, maxLevel: maxLevel, description: desc, author: author};
     Dungeon.create(newDungeon, function(err, dungeon){
         if(err){
             console.log(err);
@@ -44,8 +46,9 @@ router.post("/",middleware.isLoggedIn, function(req, res){
 //SHOW - Muestra información sobre una dungeon
 router.get("/:id", function(req, res) {
     Dungeon.findById(req.params.id).populate("comments").exec(function(err, foundDungeon){
-        if(err){
-            console.log(err);
+        if(err || !foundDungeon){
+            req.flash("error", "Dungeon not found");
+            res.redirect("back");
         } else {
             // console.log(foundDungeon);
             res.render("dungeons/show", {dungeon: foundDungeon});

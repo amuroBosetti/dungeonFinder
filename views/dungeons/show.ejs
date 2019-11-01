@@ -13,7 +13,7 @@
       <div class="thumbnail">
         <img class="img-responsive img-thumbnail" src="<%= dungeon.image %>">
         <div class="caption">
-          <h4 class="float-right">Lvl 1-3</h4>
+          <h4 class="float-right">Lvl <%= dungeon.minLevel %>-<%= dungeon.maxLevel %></h4>
           <h4><a href="#"><%=dungeon.name%></a></h4>
           <p> <%=dungeon.description%> </p>
           <p><em>added by <%= dungeon.author.username %></em></p>

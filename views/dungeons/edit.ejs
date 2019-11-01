@@ -16,6 +16,11 @@
                     <input class="form-control"type="text" name="dungeon[image]" value="<%= dungeon.image %>">
                 </div>
                 <div class="form-group">
+                    <input class="form-control"type="number" name="dungeon[minLevel]" value="<%=dungeon.minLevel%>" min="1" step="1" max="20">
+                </div>
+                <div class="form-group">
+                    <input class="form-control"type="number" name="dungeon[maxLevel]" value="<%=dungeon.maxLevel%>" min="1" step="1" max="20">
+                <div class="form-group">
                     <input class="form-control"type="text" name="dungeon[description]" value="<%= dungeon.description%>">
                 </div>
                 <div class="form-group">

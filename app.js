@@ -3,22 +3,26 @@ var express     = require("express"),
     mongoose    = require("mongoose"),
     bodyParser  = require("body-parser"),
     port        = process.env.PORT || 3000,
+    flash         = require("connect-flash"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
-    Dungeon     = require("./models/dungeon");
-    User        = require("./models/user");
-    Comment     = require("./models/comment");
-    seedDB      = require("./seeds");
-    commentRoutes = require("./routes/comments");
-    dungeonRoutes = require("./routes/dungeons");
-    indexRoutes = require("./routes/index");
+    Dungeon     = require("./models/dungeon"),
+    User        = require("./models/user"),
+    Comment     = require("./models/comment"),
+    seedDB      = require("./seeds"),
+    commentRoutes = require("./routes/comments"),
+    dungeonRoutes = require("./routes/dungeons"),
+    indexRoutes = require("./routes/index"),
     methodOverride = require("method-override");
+
 
 mongoose.connect("mongodb://localhost/dungeonfinder", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs"); //set the default type of file for templates to ejs
+app.use(flash());
 app.use(methodOverride("_method"));
+
 
  // seedDB();
 
@@ -37,6 +41,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
   res.locals.currentUser = req.user; //la variable currentUser va a ser req.user siempre
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 })
 
