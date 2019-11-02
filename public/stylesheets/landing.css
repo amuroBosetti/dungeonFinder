@@ -80,3 +80,17 @@ body {
 .no-cssanimations .slideshow li {
 	opacity: 1;
 }
+
+.footer{
+  margin-left: 1em;
+  margin-right: 1em;
+  display: flex;
+  z-index: 1;
+  position: fixed;
+  width: 98%;
+  bottom: 0;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  font-size: 1.2em;
+}

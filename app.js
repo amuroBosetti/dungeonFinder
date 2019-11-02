@@ -21,7 +21,7 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs"); //set the default type of file for templates to ejs
 app.use(flash());
 app.use(methodOverride("_method"));
-
+app.use('/stylesheets/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
 
  // seedDB();
 
