@@ -37,7 +37,8 @@ router.get("/login", function(req, res){
 //Login logic
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/dungeons",
-  failureRedirect: "/login"
+  failureRedirect: "/login",
+  failureFlash: true
 }));
 
 //Logout
@@ -46,13 +47,5 @@ router.get("/logout", function(req, res){
   req.flash("success", "Succesfully logged out");
   res.redirect("/dungeons")
 })
-
-//Middleware
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;
