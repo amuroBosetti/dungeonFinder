@@ -1,10 +1,15 @@
 @media screen and (max-width: 600px) {
-  .footer {
+  .footerS {
     font-size: 20px !important;
   }
   .footer-links{
     display: none;
   }
+}
+
+html, body{
+  height: 100%;.
+  padding-bottom: 0;
 }
 
 .thumbnail img{
@@ -28,11 +33,10 @@
 }
 
 .footer{
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
   display: flex;
-  position: relative;
-  bottom: 0.5em;
+  bottom: 0;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -47,6 +51,10 @@
   margin-bottom: 0;
 }
 
-.footer i{
+.footerS i{
   padding: 0.2em;
+}
+
+.comment-card{
+  margin: 5px;
 }
