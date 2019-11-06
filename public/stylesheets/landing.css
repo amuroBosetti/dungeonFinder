@@ -1,3 +1,12 @@
+@media screen and (max-width: 600px) {
+  .footer {
+    font-size: 20px !important;
+  }
+  .footer-links{
+    display: none;
+  }
+}
+
 body {
   background-color: #000;
 }
@@ -82,15 +91,26 @@ body {
 }
 
 .footer{
-  margin-left: 1em;
-  padding-right: 1em;
+  left: 5%;
+  right: 5%;
   display: flex;
   z-index: 1;
   position: fixed;
-  width: 98%;
-  bottom: 0;
+  bottom: 0.5em;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  font-size: 1.2em;
+  padding: 0.5em;
+  font-size: 1.3em;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.footer p{
+  margin-bottom: 0;
+}
+
+.footer i{
+  padding: 0.1em;
 }

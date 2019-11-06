@@ -1,3 +1,12 @@
+@media screen and (max-width: 600px) {
+  .footer {
+    font-size: 25px !important;
+  }
+  .footer-links{
+    display: none;
+  }
+}
+
 .thumbnail img{
   width: 100%;
 }
@@ -10,18 +19,34 @@
   padding: 9px
 }
 
+.navbar{
+  margin-bottom: 1em;
+}
+
 .delete-form{
   display: inline;
 }
 
 .footer{
   margin-left: 1em;
-  padding-right: 1em;
+  margin-right: 1em;
   display: flex;
-  width: 98%;
-  bottom: 0;
+  position: relative;
+  bottom: 0.5em;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  padding: 0.5em;
   font-size: 1.2em;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.footer p{
+  margin-bottom: 0;
+}
+
+.footer i{
+  padding: 0.2em;
 }
