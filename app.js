@@ -24,7 +24,7 @@ app.use(flash());
 app.use(methodOverride("_method"));
 app.use('/stylesheets/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
 
- seedDB();
+ // seedDB();
 
 //CONFIGURACIÓN DE PASSPORT
 app.use(require("express-session")({
