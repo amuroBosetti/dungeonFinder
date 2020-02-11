@@ -15,6 +15,7 @@ var express     = require("express"),
     indexRoutes = require("./routes/index"),
     methodOverride = require("method-override");
 
+console.log(process.env.DATABASEURL);
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -23,7 +24,7 @@ app.use(flash());
 app.use(methodOverride("_method"));
 app.use('/stylesheets/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
 
- // seedDB();
+ seedDB();
 
 //CONFIGURACIÓN DE PASSPORT
 app.use(require("express-session")({
