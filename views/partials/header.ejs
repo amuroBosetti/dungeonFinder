@@ -17,7 +17,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">Dungeon Finder</a>
                 </div>
-                <div class="collapse navbar-collapse">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="nav navbar-nav ml-auto">
                         <% if(!currentUser){ %>
                           <% include modals/login %>
