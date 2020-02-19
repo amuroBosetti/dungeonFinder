@@ -20,7 +20,7 @@ router.post("/register", function(req, res){
   User.register(newUser, req.body.password, function(err, user){
     if (err){
       req.flash("error", err.message);
-      return res.redirect("register");
+      return res.redirect("/dungeons");
     }
     passport.authenticate("local")(req, res, function(){
       req.flash("success", "Welcome to DungeonFinder, " + user.username);
@@ -29,15 +29,11 @@ router.post("/register", function(req, res){
   });
 });
 
-//Show login form
-router.get("/login", function(req, res){
-  res.render("login");
-});
 
 //Login logic
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/dungeons",
-  failureRedirect: "/login",
+  failureRedirect: "/dungeons",
   failureFlash: true
 }));
 
