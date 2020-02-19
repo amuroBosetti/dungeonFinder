@@ -16,9 +16,7 @@ The following technologies were used to make the website:
 * MongoDB - Mongoose
 * Passport for user auth
 
-#### Testing and Deployment
-* Mocha
-* Sinon
+#### Deployment
 * Heroku
 
 ### About the developer
